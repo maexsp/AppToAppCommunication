@@ -1,1 +1,0 @@
-C:\DevGitHub\AppToAppCommunication\App2\App2.csproj;x86
