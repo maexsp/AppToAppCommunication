@@ -20,7 +20,7 @@ namespace App2
 {
     public sealed partial class MainPage : Page
     {
-        private ProtocolForResultsActivatedEventArgs pfrArgs;
+        private ProtocolForResultsActivatedEventArgs protocolForResultsActivatedEventArgs;
         private string userName;
         private string msg;
         public MainPage()
@@ -45,11 +45,11 @@ namespace App2
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            pfrArgs = e.Parameter as ProtocolForResultsActivatedEventArgs;
-            if (pfrArgs != null)
+            protocolForResultsActivatedEventArgs = e.Parameter as ProtocolForResultsActivatedEventArgs;
+            if (protocolForResultsActivatedEventArgs != null)
             {
-                userName = pfrArgs.Data["UserName"] as string;
-                msg = pfrArgs.Data["Message"] as string;
+                userName = protocolForResultsActivatedEventArgs.Data["UserName"] as string;
+                msg = protocolForResultsActivatedEventArgs.Data["Message"] as string;
                 Name.Text = userName;
                 Message.Text = msg;
             }
@@ -62,12 +62,12 @@ namespace App2
 
         private void SuccessCallBack()
         {
-            if (pfrArgs != null)
+            if (protocolForResultsActivatedEventArgs != null)
             {
                 var values = new ValueSet();
                 values.Add("Message", "This is message from app 2");
                 values.Add("IsUser", "true");
-                pfrArgs.ProtocolForResultsOperation.ReportCompleted(values);
+                protocolForResultsActivatedEventArgs.ProtocolForResultsOperation.ReportCompleted(values);
             }
         }
     }
