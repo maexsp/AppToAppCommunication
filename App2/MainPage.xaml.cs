@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -32,6 +33,14 @@ namespace App2
         {
             var packageFamilyName = Windows.ApplicationModel.Package.Current.Id.FamilyName; //To get the package family name of this app which is needed in first app.
             Debug.WriteLine(packageFamilyName);
+            Application.Current.Suspending += CurrentOnSuspending;
+        }
+
+        private void CurrentOnSuspending(object sender, SuspendingEventArgs e)
+        {
+            var deferral = e.SuspendingOperation.GetDeferral();
+            SuccessCallBack();
+            deferral.Complete();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -50,6 +59,7 @@ namespace App2
         {
             SuccessCallBack();
         }
+
         private void SuccessCallBack()
         {
             if (pfrArgs != null)

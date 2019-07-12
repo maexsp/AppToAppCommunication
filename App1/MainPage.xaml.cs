@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace App1
 {
@@ -44,7 +34,7 @@ namespace App1
                     TargetApplicationPackageFamilyName = packageFamilyName
                 };
                 var values = new ValueSet();
-                values.Add("UserName", "kishor");
+                values.Add("UserName", "AppUser ABC");
                 values.Add("Message", "This is message from App 1");
                 var result = await Launcher.LaunchUriForResultsAsync(new Uri(protocol), options, values);
                 if ((result.Status == LaunchUriStatus.Success) && (result.Result != null))
@@ -56,6 +46,11 @@ namespace App1
                         var dialog = new MessageDialog(msg, "Success");
                         await dialog.ShowAsync();
                     }
+                }
+                if ((result.Status == LaunchUriStatus.Success) && (result.Result == null))
+                {
+                    var dialog = new MessageDialog("Failed to retrieve return value. Result object is null!", "Error");
+                    await dialog.ShowAsync();
                 }
             }
         }

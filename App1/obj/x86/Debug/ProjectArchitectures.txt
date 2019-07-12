@@ -1,1 +1,1 @@
-D:\Desktop\Inspection\Samples\Windows 10 app to app\win10demo-master\src\App1\App1.csproj;x86
+C:\DevGitHub\AppToAppCommunication\App1\App1.csproj;x86
